@@ -3,115 +3,313 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy 18th Birthday ❤️</title>
-
+<title>Happy Birthday My Love 💖</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
-
 <style>
 body{
     margin:0;
     padding:0;
-    font-family: 'Playfair Display', serif;
-    background: linear-gradient(135deg,#fff5f7,#fffdf5);
+    font-family:'Playfair Display', serif;
+    background:linear-gradient(135deg,#fff5f7,#fffdf5);
     overflow-x:hidden;
+    color:#333;
 }
 
-.container{
-    max-width:850px;
-    margin:80px auto;
-    padding:40px 25px;
+.page{
+    display:none;
+    height:100vh;
+    width:100%;
+    position:absolute;
+    top:0;
+    left:0;
+    padding:60px 20px;
+    box-sizing:border-box;
+    overflow-y:auto;
     text-align:center;
-    line-height:1.8;
-    font-size:18px;
 }
+
+.active{display:block;}
 
 h1{
     font-size:38px;
-    margin-bottom:30px;
+    margin-bottom:20px;
 }
 
-.countdown{
-    font-size:22px;
-    margin-bottom:40px;
+button{
+    padding:12px 25px;
+    border:none;
+    border-radius:25px;
+    background:#ff80aa;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+    margin:10px;
+    transition:0.3s;
+}
+button:hover{transform:scale(1.1);}
+
+input{
+    padding:10px;
+    border-radius:20px;
+    border:1px solid #ffb3c6;
+    text-align:center;
+    font-size:16px;
+}
+
+/* Countdown */
+#countdown{
+    font-size:24px;
+    margin:20px 0 40px 0;
     font-weight:600;
 }
 
-.section{
-    margin:70px 0;
+/* Stickers */
+.sticker{
+    position:fixed;
+    font-size:32px;
+    animation:float 6s ease-in-out infinite;
+    opacity:0.9;
+}
+@keyframes float{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-15px);}
+    100%{transform:translateY(0);}
 }
 
-.photo-caption{
-    max-width:600px;
-    margin:20px auto;
-    font-size:18px;
-}
+/* Duck and Rabbit positions */
+.duck{top:10%;left:5%;}
+.rabbit{top:50%;right:5%;animation-delay:2s;}
 
 /* Sunflowers */
 .sunflower{
     position:fixed;
     font-size:28px;
 }
-
 .sf1{top:10px;left:10px;}
 .sf2{top:10px;right:10px;}
 .sf3{bottom:10px;left:10px;}
 .sf4{bottom:10px;right:10px;}
 
-/* Duck & Rabbit */
-.float{
-    position:fixed;
-    font-size:32px;
-    animation: float 6s ease-in-out infinite;
-    opacity:0.9;
+/* Typing animation */
+#typeText{
+    white-space:pre-wrap;
+    font-size:20px;
+    line-height:1.8;
+    max-width:800px;
+    margin:0 auto 20px auto;
+    text-align:center;
 }
 
-.duck{left:5%;top:40%;}
-.rabbit{right:5%;top:55%;animation-delay:2s;}
-
-@keyframes float{
-    0%{transform:translateY(0px);}
-    50%{transform:translateY(-15px);}
-    100%{transform:translateY(0px);}
+/* Photos */
+.photo img{
+    width:80%;
+    max-width:400px;
+    border-radius:20px;
+    box-shadow:0 10px 20px rgba(0,0,0,0.2);
+    margin-bottom:20px;
 }
 
-/* Cake Bounce */
+.photo-caption{
+    max-width:700px;
+    margin:0 auto 40px auto;
+    font-size:18px;
+    line-height:1.6;
+    text-align:center;
+}
+
+/* Questions */
+#questions button{
+    display:inline-block;
+    margin:5px;
+}
+
+/* Bouncing cakes */
 .cake{
     position:fixed;
     font-size:30px;
     animation:bounce 2s infinite;
 }
-
 .c1{bottom:20px;left:20%;}
 .c2{bottom:20px;right:20%;animation-delay:0.5s;}
 .c3{bottom:20px;left:50%;animation-delay:1s;}
-
 @keyframes bounce{
     0%,100%{transform:translateY(0);}
     50%{transform:translateY(-15px);}
 }
-
 </style>
 </head>
-
 <body>
 
+<!-- Stickers -->
+<div class="sticker duck">🦆</div>
+<div class="sticker rabbit">🐰</div>
 <div class="sunflower sf1">🌻</div>
 <div class="sunflower sf2">🌻</div>
 <div class="sunflower sf3">🌻</div>
 <div class="sunflower sf4">🌻</div>
 
-<div class="float duck">🦆</div>
-<div class="float rabbit">🐰</div>
+<!-- AUDIO -->
+<audio id="bgMusic" loop>
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
 
-<div class="container">
+<!-- PAGE 1: Countdown + Play -->
+<div class="page active" id="page1">
+<h1>Special Day Loading 💖</h1>
+<div id="countdown"></div>
+<button onclick="toggleMusic()">Play / Pause Music 🎵</button>
+<br>
+<button onclick="nextPage('page2')">Next 💕</button>
+</div>
 
-<h1>Happy 18th Birthday My Love 💖</h1>
+<!-- PAGE 2: Password -->
+<div class="page" id="page2">
+<h1>Only for You 💗</h1>
+<p>Hint: 🦆 but in Tamil 😏</p>
+<input type="password" id="pass" placeholder="Enter Password">
+<br>
+<button onclick="checkPass()">Enter 💖</button>
+<p id="error" style="color:red;"></p>
+</div>
 
-<div class="countdown" id="countdown"></div>
+<!-- PAGE 3: Big Paragraph -->
+<div class="page" id="page3">
+<h1>For You My Girl 🐰💞</h1>
+<p id="typeText"></p>
+<button onclick="nextPage('page4')">Next 💕</button>
+</div>
 
-<div class="section">
+<!-- PAGES 4-9: Photos -->
+<div class="page" id="page4" class="photo">
+<h1>Our Memories 💕</h1>
+<img src="photo1.jpg">
+<div class="photo-caption">
+This is the first time I saw you in a saree 😍🌸. I couldn’t describe the magic I felt. My heart literally skipped, and I felt in love all over again 💖✨.
+</div>
+<button onclick="nextPage('page5')">Next 💕</button>
+</div>
+
+<div class="page" id="page5" class="photo">
+<h1>Our Memories 💕</h1>
+<img src="photo2.jpg">
+<div class="photo-caption">
+Our first kiss 😘💞. That unforgettable moment made my heart race and is etched forever in my soul 🏹❤️. Pure magic! ✨
+</div>
+<button onclick="nextPage('page6')">Next 💕</button>
+</div>
+
+<div class="page" id="page6" class="photo">
+<h1>Our Memories 💕</h1>
+<img src="photo3.jpg">
+<div class="photo-caption">
+The secret mall meet in Hyderabad 😎💗. Thrills, little stunts, and stolen glances made it unforgettable 💫💖. The romance was in the air 🐰🦆.
+</div>
+<button onclick="nextPage('page7')">Next 💕</button>
+</div>
+
+<div class="page" id="page7" class="photo">
+<h1>Our Memories 💕</h1>
+<img src="photo4.jpg">
+<div class="photo-caption">
+First meeting after four years 🌹💖. Evening walk, nature, talks… every second felt perfect 💫. My heart was full ❤️✨.
+</div>
+<button onclick="nextPage('page8')">Next 💕</button>
+</div>
+
+<div class="page" id="page8" class="photo">
+<h1>Our Memories 💕</h1>
+<img src="photo5.jpg">
+<div class="photo-caption">
+Vijayawada mall surprise 🤭💞. Hugging, kissing, laughing… unforgettable moments I’ll treasure forever 💖💫.
+</div>
+<button onclick="nextPage('page9')">Next 💕</button>
+</div>
+
+<div class="page" id="page9" class="photo">
+<h1>Our Memories 💕</h1>
+<img src="photo6.jpg">
+<div class="photo-caption">
+The happiest glowing moment 🥰🌟. Every smile, every laugh captured my heart 💛🐰🦆. Truly magical 💫💖.
+</div>
+<button onclick="nextPage('page10')">Next 💕</button>
+</div>
+
+<!-- PAGE 10: Questions -->
+<div class="page" id="page10">
+<h1>Are You Happy? 💖</h1>
+<div id="questions">
+<p>Answer these fun questions 😏💞</p>
+<button onclick="heartEffect(this)">Hell yeah! 😘</button>
+<button onclick="heartEffect(this)">No way 😅</button>
+<button onclick="heartEffect(this)">Absolutely 💖</button>
+<button onclick="heartEffect(this)">Are you kidding? 😜</button>
+<button onclick="heartEffect(this)">Of course 🥰</button>
+<button onclick="heartEffect(this)">Never 💕</button>
+</div>
+<button onclick="nextPage('page11')">Next 💕</button>
+</div>
+
+<!-- PAGE 11: Final Birthday -->
+<div class="page" id="page11">
+<h1>Happy Birthday My Love 🎂💖</h1>
 <p>
-When I first saw you at our relative’s wedding on November 10, 2022, time literally stopped for me. Not in the dramatic cinema way 🎬… but in that quiet, overwhelming way where everything around you keeps moving, yet inside you, something freezes completely. The music was playing 🎶, people were talking, kids were running around, relatives were laughing loudly… but the moment my eyes found you, all of it faded into the background like a muted scene. In that single second, it felt like Cupid didn’t just shoot an arrow — he aimed straight at my soul 🏹❤️
+Today, I’m celebrating you, my angel 💫🐰💛. One day, this won’t be digital anymore — I’ll hold your hand, cut the cake together 🎂, take pictures 📸, and make every moment unforgettable ✨💞.  
+Age may change, months may change, but my love for you will never fade ❤️🐰🦆. Always choosing you, always by your side 💖.  
+Thank you for becoming my “US” 💛🌹. I love you more than words can ever say 💫💖.
+</p>
+</div>
+
+<div class="cake c1">🎂</div>
+<div class="cake c2">🎂</div>
+<div class="cake c3">🎂</div>
+
+<script>
+/* Navigation */
+function nextPage(id){
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+}
+
+/* Audio Play/Pause */
+function toggleMusic(){
+    let music=document.getElementById("bgMusic");
+    if(music.paused){music.play();}else{music.pause();}
+}
+
+/* Countdown */
+let target=new Date("March 16, 2026 00:00:00 GMT+0530").getTime();
+setInterval(function(){
+    let now=new Date().getTime();
+    let distance=target-now;
+
+    let days=Math.floor(distance/(1000*60*60*24));
+    let hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+    let minutes=Math.floor((distance%(1000*60*60))/(1000*60));
+    let seconds=Math.floor((distance%(1000*60))/1000);
+
+    document.getElementById("countdown").innerHTML=
+    days+" Days 💕 "+hours+" Hours ✨ "+minutes+" Minutes 🌸 "+seconds+" Seconds 💖";
+},1000);
+
+/* Password */
+let attempts=0;
+function checkPass(){
+    let pass=document.getElementById('pass').value;
+    if(pass==="vaathukutty"){
+        nextPage('page3');
+        startTyping();
+    }else{
+        attempts++;
+        if(attempts>=3){
+            document.getElementById('error').innerText="Hint: 10-11-2022 😏";
+        }else{
+            document.getElementById('error').innerText="Wrong password 😜";
+        }
+    }
+}
+
+/* Typing Animation */
+let text=`When I first saw you at our relative’s wedding on November 10, 2022, time literally stopped for me. Not in the dramatic cinema way 🎬… but in that quiet, overwhelming way where everything around you keeps moving, yet inside you, something freezes completely. The music was playing 🎶, people were talking, kids were running around, relatives were laughing loudly… but the moment my eyes found you, all of it faded into the background like a muted scene. In that single second, it felt like Cupid didn’t just shoot an arrow — he aimed straight at my soul 🏹❤️
 I still remember the lights shining above, the scent of flowers in the air 🌸, the decorations glowing softly ✨… but somehow, all of that became blur. You stood there, unaware that someone across the hall had just lost control of his heartbeat. My heart beat in a way it never had before 💓. It wasn’t calm. It wasn’t steady. It was confused, excited, nervous, and strangely certain at the same time.
 I didn’t understand what was happening… but I knew one thing — you were not ordinary. You were different. You were special 🌷. There was something about the way you smiled, something about the way you carried yourself, something about the way your eyes sparkled when you laughed. It didn’t feel temporary. It didn’t feel like a crush. It felt important.
 And the funny part? You had absolutely no idea 😅. There I was trying to act normal, pretending to talk casually, while inside my brain was shouting, “Bro, this is not normal!” 🤦‍♂️🔥 My heart had clearly made a decision without even consulting me.
@@ -129,86 +327,34 @@ This is your 18th birthday — a new chapter 📖. A new phase. Life will change
 Maybe today I’m giving you a digital surprise 💻🎁. Maybe I’m writing words on a screen. But one day, I won’t need a website. I’ll be there beside you. I’ll hold your hand. I’ll stand next to you while you cut the cake 🎂. I’ll wipe the cream off your cheek. I’ll take pictures with you 📸. I’ll make sure your birthday feels warm, real, unforgettable.
 Because you are not just my present. You are my future 🛤️.
 Thank you for loving me. Thank you for choosing me. Thank you for believing in us. Thank you for becoming my “US.”
-I love you in a way that words will never be enough to explain 💖✨ And no matter how many birthdays pass, no matter how old we grow, I will always look at you the same way I did on November 10, 2022 — like time just stopped… and my heart just found home 🏠💘
-</p>
-</div>
+I love you in a way that words will never be enough to explain 💖✨ And no matter how many birthdays pass, no matter how old we grow, I will always look at you the same way I did on November 10, 2022 — like time just stopped… and my heart just found home 🏠💘`;
+let i=0;
+function startTyping(){
+    let speed=20;
+    function type(){
+        if(i<text.length){
+            document.getElementById("typeText").innerHTML+=text.charAt(i);
+            i++;
+            setTimeout(type,speed);
+        }
+    }
+    type();
+}
 
-<div class="section">
-<h2>Our Memories 📸💞</h2>
-
-<div class="photo-caption">
-That day in your red dress ❤️🔥 you didn’t just wear color… you became the definition of it. I swear even the sun paused for a second like “wow” ☀️✨.
-</div>
-
-<div class="photo-caption">
-The time you laughed uncontrollably 😂💗 — that sound lives rent free in my heart. It’s my favorite melody 🎶💞.
-</div>
-
-<div class="photo-caption">
-When you gave me that soft serious look 😌🌸 — pretending to be strict but secretly the cutest human alive 🥺💘.
-</div>
-
-<div class="photo-caption">
-That random candid picture 📷✨ where you didn’t know you were being clicked — pure, natural, beautiful beyond words 🌷.
-</div>
-
-<div class="photo-caption">
-The moment you got shy and looked away 🙈💖 — I still remember thinking, “She doesn’t even know how magical she is.” ✨
-</div>
-
-<div class="photo-caption">
-And every simple normal day selfie 🤳💞 that turns into something extraordinary just because it’s you 🌹💫.
-</div>
-
-</div>
-
-<div class="section">
-<h2>Final Promise 💍🤍</h2>
-<p>
-Maybe today I’m giving you a digital surprise 💻💕  
-Maybe I’m celebrating through screens and code.  
-But one day… I won’t be typing this.  
-I’ll be right there. Holding your hand 🤍  
-Standing next to you while you cut the cake 🎂  
-Stealing the first bite 😌  
-Taking pictures together 📸✨  
-Making sure your smile never fades that day.  
-
-Age will change. Years will pass.  
-But I will always choose you.  
-From your 18th birthday… to every birthday after this 🌸  
-
-Happy Birthday once again, my love 💖  
-I love you more than words, more than time, more than distance 💘✨  
-</p>
-</div>
-
-</div>
-
-<div class="cake c1">🎂</div>
-<div class="cake c2">🎂</div>
-<div class="cake c3">🎂</div>
-
-<script>
-const targetDate = new Date("March 16, 2026 00:00:00 GMT+0530").getTime();
-
-const countdown = document.getElementById("countdown");
-
-setInterval(function(){
-    const now = new Date().getTime();
-    const distance = targetDate - now;
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    countdown.innerHTML = days + " Days 💕 " + hours + " Hours ✨ " 
-    + minutes + " Minutes 🌸 " + seconds + " Seconds 💖";
-},1000);
+/* Heart Effect */
+function heartEffect(btn){
+    for(let i=0;i<30;i++){
+        let heart=document.createElement("div");
+        heart.className="sticker";
+        heart.style.fontSize=(Math.random()*30+20)+"px";
+        heart.style.left=Math.random()*90+"%";
+        heart.style.top=Math.random()*90+"%";
+        heart.innerHTML="💖";
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),4000);
+    }
+}
 </script>
 
 </body>
 </html>
-
-
