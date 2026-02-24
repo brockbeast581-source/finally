@@ -2,34 +2,28 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Sai Aarthi ❤️</title>
-
-<!-- Elegant Font -->
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-
 <style>
-body{
+body {
     margin:0;
-    font-family:'Poppins', sans-serif;
-    background:linear-gradient(135deg,#ffe6eb,#fff5e6);
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg,#ffe6eb,#fff5e6);
     overflow-x:hidden;
-    text-align:center;
     color:#444;
+    text-align:center;
 }
-
 .page{
     display:none;
-    min-height:100vh;
+    height:100vh;
     width:100%;
+    position:absolute;
+    top:0;
+    left:0;
     padding:40px 20px;
     box-sizing:border-box;
-    position:relative;
     overflow-y:auto;
 }
-
 .active{display:block;}
-
 h1{color:#ff4d88;}
 button{
     padding:12px 25px;
@@ -43,61 +37,24 @@ button{
     transition:0.3s;
 }
 button:hover{transform:scale(1.1);}
-
 input{
     padding:10px;
     border-radius:20px;
     border:1px solid #ffb3c6;
     text-align:center;
-    font-size:16px;
 }
-
 /* Countdown */
-#countdown{font-size:28px;margin-top:20px;}
-#audioBtn{
-    margin-top:15px;
-    font-size:16px;
-    border-radius:20px;
-}
-
+#countdown{font-size:30px;margin-top:20px;}
 /* Heart Rain */
 .heart{
     position:fixed;
     top:-10px;
     color:#ff99cc;
     animation:fall linear infinite;
-    z-index:9999;
 }
 @keyframes fall{
     to{transform:translateY(110vh);}
 }
-
-/* Slideshow / Photo */
-.photo{
-    display:block;
-    margin:0 auto;
-    width:60%;
-    max-width:400px;
-    border-radius:15px;
-    box-shadow:0 8px 15px rgba(0,0,0,0.2);
-    margin-bottom:20px;
-}
-
-/* Captions */
-.caption{
-    font-size:18px;
-    margin-bottom:30px;
-    line-height:1.5;
-    max-width:600px;
-    margin-left:auto;
-    margin-right:auto;
-}
-
-/* Moving No Buttons */
-.noBtn{
-    position:relative;
-}
-
 /* Stickers */
 .sticker{
     position:fixed;
@@ -109,38 +66,52 @@ input{
     50%{transform:translateY(-20px);}
     100%{transform:translateY(0px);}
 }
-
-/* Final message */
-#finalMsg{
-    font-size:20px;
-    line-height:1.6;
-    max-width:700px;
-    margin:auto;
+/* Photo Page */
+.photo-page img{
+    width:60%;
+    max-width:400px;
+    display:block;
+    margin:20px auto;
+    border-radius:20px;
+    box-shadow:0 10px 20px rgba(0,0,0,0.2);
+}
+.photo-caption{
     text-align:center;
+    font-size:18px;
+    margin-top:10px;
+    line-height:1.5;
+    padding:0 15px;
+}
+#finalMessage{
+    text-align:center;
+    font-size:20px;
+    margin:20px auto;
+    line-height:1.6;
+    padding:0 30px;
 }
 </style>
 </head>
 <body>
 
-<!-- Stickers -->
-<div class="sticker" style="top:5%;left:5%;">🐰</div>
-<div class="sticker" style="top:5%;right:5%;">🦆</div>
-<div class="sticker" style="bottom:5%;left:5%;">🌻</div>
-<div class="sticker" style="bottom:5%;right:5%;">🌻</div>
+<!-- Audio -->
+<audio id="bgMusic" loop>
+    <source src="song.mp3" type="audio/mpeg">
+</audio>
+<button id="musicBtn" onclick="toggleMusic()" style="position:fixed;top:10px;right:10px;padding:10px;border-radius:50%;">🎵</button>
 
-<!-- PAGE 1: Countdown + Music -->
+<!-- Stickers -->
+<div class="sticker" style="top:10%;left:5%;">🐰</div>
+<div class="sticker" style="bottom:10%;right:5%;">🦆</div>
+<div class="sticker" style="top:80%;left:80%;">🌻</div>
+
+<!-- PAGE 1 COUNTDOWN -->
 <div class="page active" id="page1">
     <h1>Special Day Loading... 💖</h1>
     <div id="countdown"></div>
-    <button id="audioBtn" onclick="toggleAudio()">Play Music 🎵</button>
-    <audio id="bgAudio" loop>
-      <source src="song.mp3" type="audio/mpeg">
-    </audio>
-    <br>
     <button onclick="nextPage('page2')">Continue 💕</button>
 </div>
 
-<!-- PAGE 2: Password -->
+<!-- PAGE 2 PASSWORD -->
 <div class="page" id="page2">
     <h1>Only Sai Aarthi Can Enter 💗</h1>
     <p>Hint: Your favorite nickname of Sam 😏</p>
@@ -150,105 +121,121 @@ input{
     <p id="error" style="color:red;"></p>
 </div>
 
-<!-- PAGE 3: Big Paragraph -->
+<!-- PAGE 3 TYPING BIG PARA -->
 <div class="page" id="page3">
     <h1>For You My Girl 🐰💞</h1>
     <p id="typeText"></p>
     <button onclick="nextPage('page4')">Click to Continue 💖</button>
 </div>
 
-<!-- PAGE 4-9: Photos -->
-<div class="page" id="page4">
-    <img src="photo1.jpg" class="photo">
-    <p class="caption">This is the first time I saw you in a saree, and literally my heart skipped a beat 💖✨. I never imagined someone could look this magical 😍🌸. It was unforgettable!</p>
+<!-- PHOTO PAGES -->
+<div class="page photo-page" id="page4">
+    <img src="photo1.jpg" alt="Saree pic">
+    <div class="photo-caption">The first time I saw her in saree 😍✨ I felt like magic, my heart skipped a beat 💖💫</div>
     <button onclick="nextPage('page5')">Next 💗</button>
 </div>
-
-<div class="page" id="page5">
-    <img src="photo2.jpg" class="photo">
-    <p class="caption">This is the moment of our first kiss 😘💫. That memory will stay with me forever ❤️🌟. I can’t stop smiling when I think about it 🥰.</p>
+<div class="page photo-page" id="page5">
+    <img src="photo2.jpg" alt="First Kiss">
+    <div class="photo-caption">Our first kiss 💏💞 unforgettable, butterflies everywhere 🦋❤️ I still remember it perfectly 😘</div>
     <button onclick="nextPage('page6')">Next 💗</button>
 </div>
-
-<div class="page" id="page6">
-    <img src="photo3.jpg" class="photo">
-    <p class="caption">We met secretly in Hyderabad 🏙️💖, the thrill of sneaking around made it unforgettable 😏💛. Every secret laugh, every stolen glance, I cherish forever 💕.</p>
+<div class="page photo-page" id="page6">
+    <img src="photo3.jpg" alt="Mall Secret Meet">
+    <div class="photo-caption">Secret mall meet in Hyderabad 😳❤️ Thrills, stunts, little hidden adventures, our hearts racing 🐰🦆</div>
     <button onclick="nextPage('page7')">Next 💗</button>
 </div>
-
-<div class="page" id="page7">
-    <img src="photo4.jpg" class="photo">
-    <p class="caption">After four years, seeing you again on that walk 🌅💖, talking and laughing, feeling the breeze together 🌸💛… a moment I will never forget 🥹.</p>
+<div class="page photo-page" id="page7">
+    <img src="photo4.jpg" alt="Evening Walk">
+    <div class="photo-caption">First time meeting after 4 years 🌅💖 Evening walk, nature, talking endlessly, best moment of our lives 🌻</div>
     <button onclick="nextPage('page8')">Next 💗</button>
 </div>
-
-<div class="page" id="page8">
-    <img src="photo5.jpg" class="photo">
-    <p class="caption">At Vijayawada Mall 🛍️💖, pulling you close, hugging and kissing 😘🌟… that spontaneous joy made me fall for you all over again 💕✨.</p>
+<div class="page photo-page" id="page8">
+    <img src="photo5.jpg" alt="Vijayawada Mall Hug">
+    <div class="photo-caption">Unexpected hug & kiss in Vijayawada mall 😘💞 Heart racing, unforgettable joy, laughter echoing everywhere 🌟</div>
     <button onclick="nextPage('page9')">Next 💗</button>
 </div>
-
-<div class="page" id="page9">
-    <img src="photo6.jpg" class="photo">
-    <p class="caption">Your happiest glowing photo 🌟💖… every time I see this, I feel pure joy 😍🐰🦆. You light up my world like no one else 💛✨.</p>
+<div class="page photo-page" id="page9">
+    <img src="photo6.jpg" alt="Leg Pose">
+    <div class="photo-caption">Her glowing happiest pose ✨💛 That moment, pure joy & love, my rabbit forever 🐰❤️</div>
     <button onclick="nextPage('page10')">Next 💗</button>
 </div>
 
-<!-- PAGE 10: Six Questions -->
+<!-- PAGE 10 SIX QUESTIONS -->
 <div class="page" id="page10">
-    <h1>Playful Questions 💖</h1>
-    <div id="questionsContainer"></div>
+    <h1>Fun Questions 💖</h1>
+    <div id="questionsContainer">
+        <div class="question">
+            <p>1. Are you happy with me? 😊</p>
+            <button onclick="yesEffect(this)">Hell yeah! 💕</button>
+            <button onmouseover="moveBtn(this)">Are you kidding? 😏</button>
+        </div>
+        <div class="question">
+            <p>2. Do you miss me? 🐰💛</p>
+            <button onclick="yesEffect(this)">Absolutely 💖</button>
+            <button onmouseover="moveBtn(this)">No way 😜</button>
+        </div>
+        <div class="question">
+            <p>3. Will you go on a surprise date with me? 🌹</p>
+            <button onclick="yesEffect(this)">Yes, can't wait! 😍</button>
+            <button onmouseover="moveBtn(this)">Nope 😏</button>
+        </div>
+        <div class="question">
+            <p>4. Do you like chocolates? 🍫</p>
+            <button onclick="yesEffect(this)">Of course! ❤️</button>
+            <button onmouseover="moveBtn(this)">Not really 😅</button>
+        </div>
+        <div class="question">
+            <p>5. Should we watch a movie together? 🎬</p>
+            <button onclick="yesEffect(this)">Yes, love it! 💞</button>
+            <button onmouseover="moveBtn(this)">Nah 😏</button>
+        </div>
+        <div class="question">
+            <p>6. Will you be my forever? 💖</p>
+            <button onclick="yesEffect(this)">Hell yes! 🐰💛</button>
+            <button onmouseover="moveBtn(this)">Are you serious? 😜</button>
+        </div>
+    </div>
+    <button onclick="nextPage('page11')">Next 💗</button>
 </div>
 
-<!-- PAGE 11: Final Birthday Message -->
+<!-- PAGE 11 FINAL BIRTHDAY -->
 <div class="page" id="page11">
-    <h1>HAPPY BIRTHDAY MY LOVE 🎂💖</h1>
-    <p id="finalMsg">
-    [Your final romantic/playful emotional birthday message goes here… thousands of letters with emojis 🎉💞🐰🦆🌻]
+    <h1>HAPPY 18TH BIRTHDAY MY GIRL 🎂💖</h1>
+    <p id="finalMessage">
+        Baby, I love you endlessly 😘💞 This digital surprise is only the beginning…  
+        One day, I will hold your hand, cut the cake together 🎂✨  
+        Take pictures, laugh, hug, and make every moment ours 🐰🌻  
+        Thank you for choosing me 💖 You are my forever and always 🌟❤️
     </p>
 </div>
 
 <script>
-// Navigation
+/* Navigation */
 function nextPage(id){
     document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
     document.getElementById(id).classList.add('active');
 }
 
-// Music Button
-let audioPlaying = false;
-function toggleAudio(){
-    const audio = document.getElementById('bgAudio');
-    if(audioPlaying){
-        audio.pause();
-        audioPlaying = false;
-        document.getElementById('audioBtn').innerText = "Play Music 🎵";
-    } else {
-        audio.play();
-        audioPlaying = true;
-        document.getElementById('audioBtn').innerText = "Pause Music ⏸️";
-    }
-}
-
-// Password
+/* Password */
 let attempts = 0;
 function checkPass(){
-    let pass = document.getElementById('pass').value;
-    if(pass === "vaathukutty"){
+    let input = document.getElementById('pass').value.toLowerCase();
+    let correct = "vaathukutty"; // change as needed
+    if(input === correct){
         nextPage('page3');
         startTyping();
     } else {
         attempts++;
-        if(attempts >= 3){
-            document.getElementById('error').innerText = "Hint: Kutty 😏"; // Replace Kutty with your favorite nickname
+        if(attempts>=2){
+            document.getElementById('error').innerText="Hint: 10-11-2022 😏";
         } else {
-            document.getElementById('error').innerText = "Wrong password 😜";
+            document.getElementById('error').innerText="Wrong password 😜";
         }
     }
 }
 
-// Typing Animation (Big Paragraph)
-let text=`[When I first saw you at our relative’s wedding on November 10, 2022, time literally stopped for me. Not in the dramatic cinema way 🎬… but in that quiet, overwhelming way where everything around you keeps moving, yet inside you, something freezes completely. The music was playing 🎶, people were talking, kids were running around, relatives were laughing loudly… but the moment my eyes found you, all of it faded into the background like a muted scene. In that single second, it felt like Cupid didn’t just shoot an arrow — he aimed straight at my soul 🏹❤️
+/* Typing Animation */
+let text = `[When I first saw you at our relative’s wedding on November 10, 2022, time literally stopped for me. Not in the dramatic cinema way 🎬… but in that quiet, overwhelming way where everything around you keeps moving, yet inside you, something freezes completely. The music was playing 🎶, people were talking, kids were running around, relatives were laughing loudly… but the moment my eyes found you, all of it faded into the background like a muted scene. In that single second, it felt like Cupid didn’t just shoot an arrow — he aimed straight at my soul 🏹❤️
 I still remember the lights shining above, the scent of flowers in the air 🌸, the decorations glowing softly ✨… but somehow, all of that became blur. You stood there, unaware that someone across the hall had just lost control of his heartbeat. My heart beat in a way it never had before 💓. It wasn’t calm. It wasn’t steady. It was confused, excited, nervous, and strangely certain at the same time.
 I didn’t understand what was happening… but I knew one thing — you were not ordinary. You were different. You were special 🌷. There was something about the way you smiled, something about the way you carried yourself, something about the way your eyes sparkled when you laughed. It didn’t feel temporary. It didn’t feel like a crush. It felt important.
 And the funny part? You had absolutely no idea 😅. There I was trying to act normal, pretending to talk casually, while inside my brain was shouting, “Bro, this is not normal!” 🤦‍♂️🔥 My heart had clearly made a decision without even consulting me.
@@ -269,7 +256,7 @@ Thank you for loving me. Thank you for choosing me. Thank you for believing in u
 I love you in a way that words will never be enough to explain 💖✨ And no matter how many birthdays pass, no matter how old we grow, I will always look at you the same way I did on November 10, 2022 — like time just stopped… and my heart just found home 🏠💘]`;
 let i=0;
 function startTyping(){
-    let speed=20;
+    let speed=40;
     function type(){
         if(i<text.length){
             document.getElementById("typeText").innerHTML+=text.charAt(i);
@@ -280,29 +267,54 @@ function startTyping(){
     type();
 }
 
-// Countdown
+/* Questions Yes/No Effects */
+function yesEffect(btn){
+    // hearts overflow
+    for(let j=0;j<30;j++){
+        let heart=document.createElement("div");
+        heart.className="heart";
+        heart.innerHTML="💖";
+        heart.style.left=Math.random()*100+"vw";
+        heart.style.animationDuration=(Math.random()*3+2)+"s";
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),5000);
+    }
+    btn.style.background="#ff80aa";
+}
+
+function moveBtn(btn){
+    btn.style.position="absolute";
+    btn.style.top=Math.random()*80+"%";
+    btn.style.left=Math.random()*80+"%";
+}
+
+/* Music Play/Pause */
+function toggleMusic(){
+    let music = document.getElementById("bgMusic");
+    if(music.paused){music.play();}
+    else{music.pause();}
+}
+
+/* Countdown */
 let target=new Date("March 16, 2026 00:00:00").getTime();
 let x=setInterval(function(){
     let now=new Date().getTime();
     let distance=target-now;
-
     if(distance<0){
         clearInterval(x);
         document.getElementById("countdown").innerHTML="It's Her Day 🎂💖";
         return;
     }
-
     let days=Math.floor(distance/(1000*60*60*24));
     let hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
     let minutes=Math.floor((distance%(1000*60*60))/(1000*60));
     let seconds=Math.floor((distance%(1000*60))/1000);
-
     document.getElementById("countdown").innerHTML=
     days+"d "+hours+"h "+minutes+"m "+seconds+"s ";
 },1000);
 
-// Heart Rain (triggered only on Yes answers)
-function createHeart(){
+/* Heart Rain */
+setInterval(function(){
     let heart=document.createElement("div");
     heart.className="heart";
     heart.innerHTML="💖";
@@ -310,38 +322,7 @@ function createHeart(){
     heart.style.animationDuration=(Math.random()*3+2)+"s";
     document.body.appendChild(heart);
     setTimeout(()=>heart.remove(),5000);
-}
-
-// Questions
-const questions = [
-    {q:"Do you love me?", options:["Hell yeah 💖","No way 😜","Are you kidding 😏"]},
-    {q:"Will you be my forever?", options:["Absolutely 💛","Nope 😅","Never 😆"]},
-    {q:"Are we the cutest couple?", options:["Yes 😍","No 🙄","Are you serious 😜"]},
-    {q:"Do you miss me when I’m gone?", options:["Always 💖","No 🙃","Not really 😅"]},
-    {q:"Do you think I spoil you too much?", options:["Of course 😘","Nope 🤷‍♂️","Never 😏"]},
-    {q:"Are you happy with our journey?", options:["Yes 💛","No 😅","I guess 😐"]}
-];
-
-const container = document.getElementById('questionsContainer');
-questions.forEach((item,idx)=>{
-    const div = document.createElement('div');
-    div.style.marginBottom="20px";
-    const h4 = document.createElement('h3');
-    h4.innerText=item.q;
-    div.appendChild(h4);
-    item.options.forEach(opt=>{
-        const btn = document.createElement('button');
-        btn.innerText = opt;
-        btn.style.margin="5px";
-        if(opt.includes("Yes") || opt.includes("Hell yeah") || opt.includes("Absolutely") || opt.includes("Of course") || opt.includes("Always")){
-            btn.onclick = ()=>{ for(let i=0;i<30;i++){createHeart();} };
-        } else {
-            btn.onmouseover=()=>{btn.style.position="absolute"; btn.style.top=Math.random()*80+"%"; btn.style.left=Math.random()*80+"%";}
-        }
-        div.appendChild(btn);
-    });
-    container.appendChild(div);
-});
+},300);
 </script>
 
 </body>
