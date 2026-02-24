@@ -1,297 +1,200 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For My Girl ❤️</title>
+<title>Happy 18th Birthday ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 body{
-margin:0;
-font-family: 'Poppins', sans-serif;
-background:linear-gradient(135deg,#ff9a9e,#fad0c4);
-color:white;
-text-align:center;
-overflow-x:hidden;
+    margin:0;
+    padding:0;
+    font-family: 'Playfair Display', serif;
+    background: linear-gradient(135deg,#fff5f7,#fffdf5);
+    overflow-x:hidden;
 }
 
-.page{
-display:none;
-min-height:100vh;
-padding:40px 20px;
-box-sizing:border-box;
+.container{
+    max-width:850px;
+    margin:80px auto;
+    padding:40px 25px;
+    text-align:center;
+    line-height:1.8;
+    font-size:18px;
 }
 
-.active{
-display:block;
+h1{
+    font-size:38px;
+    margin-bottom:30px;
 }
 
-button{
-padding:12px 20px;
-margin:10px;
-border:none;
-border-radius:25px;
-background:#ff4e78;
-color:white;
-font-size:15px;
-cursor:pointer;
+.countdown{
+    font-size:22px;
+    margin-bottom:40px;
+    font-weight:600;
 }
 
-img{
-width:90%;
-max-width:350px;
-border-radius:20px;
-margin-top:20px;
-box-shadow:0 10px 25px rgba(0,0,0,0.3);
+.section{
+    margin:70px 0;
 }
 
-input{
-padding:10px;
-border-radius:10px;
-border:none;
+.photo-caption{
+    max-width:600px;
+    margin:20px auto;
+    font-size:18px;
 }
 
-.heart{
-position:fixed;
-font-size:20px;
-animation:floatUp 4s linear forwards;
-pointer-events:none;
+/* Sunflowers */
+.sunflower{
+    position:fixed;
+    font-size:28px;
 }
 
-@keyframes floatUp{
-0%{transform:translateY(0);opacity:1;}
-100%{transform:translateY(-800px);opacity:0;}
+.sf1{top:10px;left:10px;}
+.sf2{top:10px;right:10px;}
+.sf3{bottom:10px;left:10px;}
+.sf4{bottom:10px;right:10px;}
+
+/* Duck & Rabbit */
+.float{
+    position:fixed;
+    font-size:32px;
+    animation: float 6s ease-in-out infinite;
+    opacity:0.9;
 }
 
-.sticker{
-position:absolute;
-font-size:45px;
+.duck{left:5%;top:40%;}
+.rabbit{right:5%;top:55%;animation-delay:2s;}
+
+@keyframes float{
+    0%{transform:translateY(0px);}
+    50%{transform:translateY(-15px);}
+    100%{transform:translateY(0px);}
 }
 
-.duck{left:10px;bottom:10px;}
-.rabbit{right:10px;bottom:10px;}
-
-#cake{
-position:fixed;
-font-size:40px;
-bottom:20px;
-right:20px;
-animation:bounce 2s infinite alternate;
+/* Cake Bounce */
+.cake{
+    position:fixed;
+    font-size:30px;
+    animation:bounce 2s infinite;
 }
+
+.c1{bottom:20px;left:20%;}
+.c2{bottom:20px;right:20%;animation-delay:0.5s;}
+.c3{bottom:20px;left:50%;animation-delay:1s;}
 
 @keyframes bounce{
-from{transform:translateY(0);}
-to{transform:translateY(-15px);}
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-15px);}
 }
+
 </style>
 </head>
 
 <body>
 
-<audio id="bgMusic" loop>
-<source src="song.mp3" type="audio/mp3">
-</audio>
+<div class="sunflower sf1">🌻</div>
+<div class="sunflower sf2">🌻</div>
+<div class="sunflower sf3">🌻</div>
+<div class="sunflower sf4">🌻</div>
 
-<!-- PAGE 1 -->
-<div class="page active" id="page1">
-<h1>Countdown 💖</h1>
-<h2 id="countdown"></h2>
-<button onclick="toggleMusic()">Play / Pause Music 🎵</button><br>
-<button onclick="nextPage(2)">Enter ❤️</button>
-</div>
+<div class="float duck">🦆</div>
+<div class="float rabbit">🐰</div>
 
-<!-- PAGE 2 -->
-<div class="page" id="page2">
-<h2>Password 🔐</h2>
-<p id="hint"></p>
-<input type="password" id="pass">
-<br>
-<button onclick="checkPass()">Unlock</button>
-<p id="error"></p>
-</div>
+<div class="container">
 
-<!-- PAGE 3 -->
-<div class="page" id="page3">
-<h2>For You ❤️</h2>
-<p id="typing"></p>
-<button onclick="nextPage(4)">Next ➜</button>
-</div>
+<h1>Happy 18th Birthday My Love 💖</h1>
 
-<!-- PHOTO PAGES -->
+<div class="countdown" id="countdown"></div>
 
-<div class="page" id="page4">
-<h2>The First Time I Saw You in Saree ✨</h2>
-<img src="photo1.jpg">
-<p>When I saw you in a saree for the first time, I genuinely forgot how to breathe for a second. It wasn’t just beauty — it was elegance, grace, and something that felt unreal. You didn’t just look pretty… you looked unforgettable. That moment made me realize all over again how lucky I am to call you mine.</p>
-<button onclick="nextPage(5)">Next ➜</button>
-</div>
-
-<div class="page" id="page5">
-<h2>Our First Kiss 💋</h2>
-<img src="photo2.jpg">
-<p>That moment… our first kiss. Nervous, innocent, real. It wasn’t just a kiss — it was the beginning of something deeper. I can still remember how my heart was racing. Some memories fade, but that one never will.</p>
-<button onclick="nextPage(6)">Next ➜</button>
-</div>
-
-<div class="page" id="page6">
-<h2>Secret Hyderabad Memory 🎭</h2>
-<img src="photo3.jpg">
-<p>Meeting you secretly in Hyderabad felt like we were the main characters in our own little movie. The excitement, the small crazy stunts, the thrill of hiding and still smiling — it was reckless in the best way. That memory still makes my heart race.</p>
-<button onclick="nextPage(7)">Next ➜</button>
-</div>
-
-<div class="page" id="page7">
-<h2>After Four Years 🤍</h2>
-<img src="photo4.jpg">
-<p>Four years without seeing you… and finally standing next to you again. That evening walk felt peaceful beyond words. The breeze, the silence, the comfort — it felt like time apologized for keeping us apart.</p>
-<button onclick="nextPage(8)">Next ➜</button>
-</div>
-
-<div class="page" id="page8">
-<h2>Vijayawada Surprise 💞</h2>
-<img src="photo5.jpg">
-<p>That unexpected moment in Vijayawada mall… pulling you close without thinking. It wasn’t planned. It wasn’t perfect. But it was real. In that second, nothing else in the world mattered except you in my arms.</p>
-<button onclick="nextPage(9)">Next ➜</button>
-</div>
-
-<div class="page" id="page9">
-<h2>My Little Bunny 🐰</h2>
-<img src="photo6.jpg">
-<p>You don’t even realize how effortlessly cute you are. Even in the smallest moments, you manage to steal all my attention. I look at this and just smile like an idiot. My little bunny with main-character energy ✨</p>
-<button onclick="nextPage(10)">Next ➜</button>
-</div>
-
-<!-- QUESTIONS PAGE -->
-
-<div class="page" id="page10">
-<h2>Answer Honestly 😌</h2>
-
-<p>Are you happy?</p>
-<button onclick="heartExplosion()">Happiest because of you 💖</button>
-<button onclick="moveBtn(this)">You better keep trying 😏</button>
-
-<p>Did I make you smile today?</p>
-<button onclick="heartExplosion()">Obviously you did 😂</button>
-<button onclick="moveBtn(this)">Maybe… try harder 😜</button>
-
-<p>Do you feel how much I love you?</p>
-<button onclick="heartExplosion()">Every single second 🥹</button>
-<button onclick="moveBtn(this)">Prove it more 😌</button>
-
-<p>Are you proud of our journey?</p>
-<button onclick="heartExplosion()">So proud of us 💕</button>
-<button onclick="moveBtn(this)">We are unstoppable 🔥</button>
-
-<p>Will you choose me every day?</p>
-<button onclick="heartExplosion()">Every day without fail 🤍</button>
-<button onclick="moveBtn(this)">Even when I’m moody 😤</button>
-
-<p>Will you be with me forever?</p>
-<button onclick="heartExplosion(); nextPage(11)">Forever means forever 💍</button>
-<button onclick="moveBtn(this)">You’re stuck with me 😌</button>
-
-<div class="sticker duck">🦆</div>
-<div class="sticker rabbit">🐰</div>
-</div>
-
-<!-- FINAL PAGE -->
-
-<div class="page" id="page11">
-<h2>Happy 18th Birthday 🎂</h2>
+<div class="section">
 <p>
-Happy 18th Birthday, my love 💖  
-Today you step into a new chapter of life. Maybe today I’m giving you a digital surprise… but one day I’ll stand beside you, hold your hand while you cut the cake 🎂, wipe the cream off your cheek, take pictures with you 📸, and make sure your smile never fades.  
-Age may change. Years will pass. But one thing will never change — I will always choose you. Always stand with you. Always celebrate you.  
-I love you more than words can explain 🤍
+Today is not just another day… it’s the day the world became softer, brighter, and infinitely more beautiful because you were born 🌸✨  
+Eighteen years of your existence… and somehow, I’m lucky enough to stand in your story now.  
+From your smile that melts my strongest moods 😌💘 to the way you pretend to be serious but end up laughing like a little kid 😂💞 — every version of you is my favorite version.  
+You’re growing, evolving, stepping into adulthood with grace 🌷 and I’m here watching in admiration like, “How did I get this lucky?” 💖  
+This birthday isn’t just about candles and cake 🎂✨ — it’s about celebrating the woman you’re becoming, the strength inside you 💪🌹, and the warmth you carry so effortlessly.  
+And yes… I’ll still tease you, annoy you, and steal your food 😌🍟 but I’ll also stand beside you through every dream you chase 🚀💫  
 </p>
-
-<div id="cake">🎂</div>
 </div>
+
+<div class="section">
+<h2>Our Memories 📸💞</h2>
+
+<div class="photo-caption">
+That day in your red dress ❤️🔥 you didn’t just wear color… you became the definition of it. I swear even the sun paused for a second like “wow” ☀️✨.
+</div>
+
+<div class="photo-caption">
+The time you laughed uncontrollably 😂💗 — that sound lives rent free in my heart. It’s my favorite melody 🎶💞.
+</div>
+
+<div class="photo-caption">
+When you gave me that soft serious look 😌🌸 — pretending to be strict but secretly the cutest human alive 🥺💘.
+</div>
+
+<div class="photo-caption">
+That random candid picture 📷✨ where you didn’t know you were being clicked — pure, natural, beautiful beyond words 🌷.
+</div>
+
+<div class="photo-caption">
+The moment you got shy and looked away 🙈💖 — I still remember thinking, “She doesn’t even know how magical she is.” ✨
+</div>
+
+<div class="photo-caption">
+And every simple normal day selfie 🤳💞 that turns into something extraordinary just because it’s you 🌹💫.
+</div>
+
+</div>
+
+<div class="section">
+<h2>Final Promise 💍🤍</h2>
+<p>
+Maybe today I’m giving you a digital surprise 💻💕  
+Maybe I’m celebrating through screens and code.  
+But one day… I won’t be typing this.  
+I’ll be right there. Holding your hand 🤍  
+Standing next to you while you cut the cake 🎂  
+Stealing the first bite 😌  
+Taking pictures together 📸✨  
+Making sure your smile never fades that day.  
+
+Age will change. Years will pass.  
+But I will always choose you.  
+From your 18th birthday… to every birthday after this 🌸  
+
+Happy Birthday once again, my love 💖  
+I love you more than words, more than time, more than distance 💘✨  
+</p>
+</div>
+
+</div>
+
+<div class="cake c1">🎂</div>
+<div class="cake c2">🎂</div>
+<div class="cake c3">🎂</div>
 
 <script>
-function nextPage(p){
-document.querySelectorAll('.page').forEach(pg=>pg.classList.remove('active'));
-document.getElementById('page'+p).classList.add('active');
-window.scrollTo(0,0);
-}
+const targetDate = new Date("March 16, 2026 00:00:00 GMT+0530").getTime();
 
-function toggleMusic(){
-let m=document.getElementById("bgMusic");
-if(m.paused){m.play();}
-else{m.pause();}
-}
+const countdown = document.getElementById("countdown");
 
-let attempts=0;
-function checkPass(){
-let val=document.getElementById("pass").value;
-attempts++;
-if(val==="10112022"){
-nextPage(3);
-startTyping();
-}else{
-document.getElementById("error").innerText="Wrong Password";
-if(attempts>=3){
-document.getElementById("hint").innerText="Hint: 10 11 2022";
-}
-}
-}
+setInterval(function(){
+    const now = new Date().getTime();
+    const distance = targetDate - now;
 
-let text=`(When I first saw you at our relative’s wedding on November 10, 2022, time literally stopped for me. Not in the dramatic cinema way 🎬… but in that quiet, overwhelming way where everything around you keeps moving, yet inside you, something freezes completely. The music was playing 🎶, people were talking, kids were running around, relatives were laughing loudly… but the moment my eyes found you, all of it faded into the background like a muted scene. In that single second, it felt like Cupid didn’t just shoot an arrow — he aimed straight at my soul 🏹❤️
-I still remember the lights shining above, the scent of flowers in the air 🌸, the decorations glowing softly ✨… but somehow, all of that became blur. You stood there, unaware that someone across the hall had just lost control of his heartbeat. My heart beat in a way it never had before 💓. It wasn’t calm. It wasn’t steady. It was confused, excited, nervous, and strangely certain at the same time.
-I didn’t understand what was happening… but I knew one thing — you were not ordinary. You were different. You were special 🌷. There was something about the way you smiled, something about the way you carried yourself, something about the way your eyes sparkled when you laughed. It didn’t feel temporary. It didn’t feel like a crush. It felt important.
-And the funny part? You had absolutely no idea 😅. There I was trying to act normal, pretending to talk casually, while inside my brain was shouting, “Bro, this is not normal!” 🤦‍♂️🔥 My heart had clearly made a decision without even consulting me.
-From that day, without even realizing it, you slowly became part of my everyday thoughts. Not in an obsessive way… but in a peaceful way. You became my calm in chaos 🌊, my smile during random boring afternoons ☀️, my quiet comfort during stressful nights 🌙. Even when we didn’t talk much, even when things felt uncertain, your existence alone gave me reassurance. It was strange and beautiful at the same time 🌼.
-I waited for you. Not for attention. Not for time pass. Not because I had nothing better to do. But because what I felt was real ❤️‍🔥. Four long years. Four years of silently choosing you. Four years of telling myself, “If it’s meant to be, it will be.” Four years of praying in small quiet moments 🙏 that maybe one day, you would look at me the way I looked at you.
-There were nights I questioned myself. There were days I felt foolish. There were moments I almost gave up. But every time I remembered your smile, something inside me said, “Stay.” 🕊️ So I stayed. Not loudly. Not dramatically. Just patiently.
-And when you finally accepted me… that moment healed every second of waiting 🥹💫 It felt like the universe gently whispered, “See? I told you.” All those doubts, all those fears, all those lonely nights suddenly made sense. It was worth it. Every single second.
-Because now… it is not “you” or “me.” It is US 🤍 And this “US” means more to me than those four years ever could. It’s not just a word. It’s a promise. It’s a partnership. It’s two imperfect people choosing each other every single day.
-Listen to me carefully, my girl — I will never leave you. Not when things are easy. Not when things are hard. Not when life tests us. If the world stands against you 🌍, I will stand in front of you. If problems come, we face them together. If pain comes, we heal together. If success comes, we celebrate louder than everyone else together 🥂✨
-You are not just someone I love. You are my safe place 🏡. My rabbit 🐰. My soft corner. My chaos and my calm. You didn’t just enter my life — you slowly became my life. You became part of my habits, my plans, my dreams, my future thoughts 🌈.
-And yes… sometimes you’re dramatic 😌. Sometimes you overthink. Sometimes you act like you don’t need reassurance — but I know you do. And I love that about you too. I love your strength 💪. I love your vulnerability 💕. I love your stubbornness. I love the way you pretend to be serious but end up laughing first 😂.
-You are not perfect. And neither am I. But somehow, together, we feel right. And that feeling is rare ✨.
-On your birthday, I don’t just wish you happiness 🎂. I promise to be part of it. I promise to support your dreams 🌟. I promise to clap the loudest when you win. I promise to hold you when you’re tired. I promise to protect your heart the way I protect my own 💞.
-This is your 18th birthday — a new chapter 📖. A new phase. Life will change. Age will change. Months will pass. People will come and go. But one thing will stay constant — me choosing you.
-Maybe today I’m giving you a digital surprise 💻🎁. Maybe I’m writing words on a screen. But one day, I won’t need a website. I’ll be there beside you. I’ll hold your hand. I’ll stand next to you while you cut the cake 🎂. I’ll wipe the cream off your cheek. I’ll take pictures with you 📸. I’ll make sure your birthday feels warm, real, unforgettable.
-Because you are not just my present. You are my future 🛤️.
-Thank you for loving me. Thank you for choosing me. Thank you for believing in us. Thank you for becoming my “US.”
-I love you in a way that words will never be enough to explain 💖✨ And no matter how many birthdays pass, no matter how old we grow, I will always look at you the same way I did on November 10, 2022 — like time just stopped… and my heart just found home 🏠💘)`;
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-let i=0;
-function startTyping(){
-if(i<text.length){
-document.getElementById("typing").innerHTML+=text.charAt(i);
-i++;
-setTimeout(startTyping,15);
-}
-}
-
-function heartExplosion(){
-for(let i=0;i<60;i++){
-let heart=document.createElement("div");
-heart.className="heart";
-heart.innerHTML="❤️";
-heart.style.left=Math.random()*100+"vw";
-heart.style.top=Math.random()*100+"vh";
-heart.style.fontSize=(Math.random()*20+15)+"px";
-document.body.appendChild(heart);
-setTimeout(()=>heart.remove(),4000);
-}
-}
-
-function moveBtn(btn){
-btn.style.position="absolute";
-btn.style.left=Math.random()*80+"%";
-btn.style.top=Math.random()*80+"%";
-}
-
-let target=new Date("March 16, 2026 00:00:00").getTime();
-setInterval(()=>{
-let now=new Date().getTime();
-let diff=target-now;
-let d=Math.floor(diff/(1000*60*60*24));
-document.getElementById("countdown").innerHTML=d+" Days Left 💕";
+    countdown.innerHTML = days + " Days 💕 " + hours + " Hours ✨ " 
+    + minutes + " Minutes 🌸 " + seconds + " Seconds 💖";
 },1000);
 </script>
 
 </body>
 </html>
+
